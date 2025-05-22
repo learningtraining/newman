@@ -32,11 +32,13 @@ jobs:
     - name: Install Newman
       run: npm install -g newman
 
+    - name: Install NEWMAN HTML package
+      run: npm install -g newman-reporter-htmlextra
+     
+
     - name: Run Postman collection
       run: |
-        newman run REST_API_Exmaple.postman_collection.json \
-          --reporters cli,html \
-          --reporter-html-export newman-report.html
+        newman run REST_API_Exmaple.postman_collection.json -r --htmlextra --reporter-htmlextra-export ".\newman-report.html"
 
     - name: Upload Newman HTML Report
       uses: actions/upload-artifact@v3
