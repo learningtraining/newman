@@ -22,7 +22,10 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4.6.2
+      uses: actions/checkout@v3
+    - name: Create dir
+      run: |
+        mkdir SampleArtifact
       # uses: actions/upload-artifact@v3.1.3
 
     - name: Setup Node.js
@@ -39,11 +42,11 @@ jobs:
 
     - name: Run Postman collection
       run: |
-        newman run REST_API_Exmaple.postman_collection.json -r --htmlextra --reporter-htmlextra-export ".\newman-report.html"
+        newman run REST_API_Exmaple.postman_collection.json -r --htmlextra --reporter-htmlextra-export "SampleArtifact/report.html"
 
     - name: Upload Newman HTML Report
       # uses: actions/upload-artifact@v3
-      uses: actions/upload-artifact@v4.6.2
+      uses: actions/upload-artifact@v3
       with:
-        name: newman-report
-        path: newman-report.html
+        name: Reports
+        path: SampleArtifact
